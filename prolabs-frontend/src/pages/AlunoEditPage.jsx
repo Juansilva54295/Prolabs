@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getAlunoById, updateAluno } from '../services/alunos';
 import AlunoForm from '../components/AlunoForm';
@@ -46,18 +46,6 @@ function AlunoEditPage() {
     }
   };
 
-  const initialData = useMemo(() => {
-    if (!aluno) return null;
-
-    return {
-      name: aluno.user?.name || '',
-      email: aluno.user?.email || '',
-      matricula: aluno.matricula || '',
-      curso: aluno.curso || '',
-      semestre: aluno.semestre || '',
-    };
-  }, [aluno]);
-
   if (loadingPage) {
     return <p>Carregando...</p>;
   }
@@ -77,7 +65,13 @@ function AlunoEditPage() {
       <Mensagem tipo="sucesso" texto={mensagem} />
 
       <AlunoForm
-        initialData={initialData}
+        initialData={{
+          name: aluno.user?.name || '',
+          email: aluno.user?.email || '',
+          matricula: aluno.matricula || '',
+          curso: aluno.curso || '',
+          semestre: aluno.semestre || '',
+        }}
         onSubmit={handleUpdate}
         loading={loadingSubmit}
         textoBotao="Salvar Alterações"

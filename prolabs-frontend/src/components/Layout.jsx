@@ -8,8 +8,9 @@ function Layout({ children }) {
 
         <nav className="nav">
           <Link to="/agendamentos">Agendamentos</Link>
-          <Link to="/agendamentos/novo">Novo Agendamento</Link>
+          <Link to="/alunos">Alunos</Link>
           <Link to="/login">Login</Link>
+          <Link to="/register">Registrar</Link>
           <Link to="/perfil">Perfil</Link>
         </nav>
       </header>

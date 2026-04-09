@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 function LoginPage() {
   return (
     <div>
@@ -16,6 +18,11 @@ function LoginPage() {
 
         <button type="submit">Entrar</button>
       </form>
+
+      <div style={{ marginTop: '15px' }}>
+        <span>Não tem conta? </span>
+        <Link to="/register">Registrar</Link>
+      </div>
 
       <hr />
 

@@ -19,7 +19,7 @@ class GoogleAuthController extends Controller
 
     public function callback(): RedirectResponse
     {
-        $googleUser = Socialite::driver('google')->user();
+        $googleUser = Socialite::driver('google')->stateless()->user();
 
         $user = User::where('email', $googleUser->getEmail())->first();
 
@@ -39,11 +39,12 @@ class GoogleAuthController extends Controller
                 'profile_photo_source' => 'google',
                 'password' => Hash::make(Str::random(32)),
                 'email_verified_at' => now(),
+                'role' => 'aluno',
             ]);
         }
 
         Auth::login($user);
 
-        return redirect()->route('dashboard');
+        return redirect()->away(env('FRONTEND_URL', 'http://localhost:5174') . '/agendamentos');
     }
 }
